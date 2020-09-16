@@ -1,6 +1,7 @@
 package com.sabkayar.praveen.tabexperiment;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Use PagerAdapter to manage page views in fragments.
         // Each page is represented by its own fragment.
-        PagerAdapter adapter = new PagerAdapter(this, mBinding.tabLayout.getTabCount());
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),getLifecycle(), mBinding.tabLayout.getTabCount());
         mBinding.viewPager.setAdapter(adapter);
 
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
