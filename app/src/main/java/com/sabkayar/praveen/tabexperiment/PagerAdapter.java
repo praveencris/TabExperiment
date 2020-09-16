@@ -2,16 +2,17 @@ package com.sabkayar.praveen.tabexperiment;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-class PagerAdapter extends FragmentStatePagerAdapter {
+class PagerAdapter extends FragmentStateAdapter {
     int mNumberOfTabs;
 
-    public PagerAdapter(@NonNull FragmentManager fm, int behavior, int numOfTabs) {
-        super(fm, behavior);
-        mNumberOfTabs = numOfTabs;
+    public PagerAdapter(@NonNull FragmentActivity fragmentActivity, int noOfTabs) {
+        super(fragmentActivity);
+        mNumberOfTabs = noOfTabs;
     }
+
 
     /**
      * Return the Fragment associated with a specified position.
@@ -20,7 +21,7 @@ class PagerAdapter extends FragmentStatePagerAdapter {
      */
     @NonNull
     @Override
-    public Fragment getItem(int position) {
+    public Fragment createFragment(int position) {
         switch (position) {
             case 0:
                 return new TabFragment1();
@@ -36,7 +37,7 @@ class PagerAdapter extends FragmentStatePagerAdapter {
      * Return the number of views available.
      */
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return mNumberOfTabs;
     }
 }
