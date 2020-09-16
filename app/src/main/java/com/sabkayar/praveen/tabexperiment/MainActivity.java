@@ -1,6 +1,7 @@
 package com.sabkayar.praveen.tabexperiment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import com.sabkayar.praveen.tabexperiment.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mBinding;
+    public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Create an instance of the tab layout from the view.--No need as we are using viewBinding
 
-        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(R.string.tab_label1));
-        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(R.string.tab_label2));
-        mBinding.tabLayout.addTab(mBinding.tabLayout.newTab().setText(R.string.tab_label3));
-
-        // Set the tabs to fill the entire layout.
-        mBinding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
         // Use PagerAdapter to manage page views in fragments.
         // Each page is represented by its own fragment.
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),getLifecycle(), mBinding.tabLayout.getTabCount());
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),getLifecycle(), 4);
         mBinding.viewPager.setAdapter(adapter);
 
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
@@ -50,11 +45,14 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         tab.setText(R.string.tab_label3);
                         break;
+                    case 3 :
+                        tab.setText(R.string.tab_label4);
                 }
             }
         });
         tabLayoutMediator.attach();
 
+        Log.d(TAG, "onCreate: ");
     }
 
 }
